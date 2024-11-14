@@ -1,0 +1,72 @@
+name: Build and Sign Windows Python Interpreter
+
+on:
+  push:
+    branches: [feat/RKT-673-python-interpreters]
+
+permissions:
+  contents: write
+  actions: read
+
+env:
+  AZURE_KEYVAULT_URL: https://rinktvault.vault.azure.net/
+  AZURE_KEYVAULT_CERTIFICATE: Rinkt
+
+jobs:
+  build-windows:
+    name: Build for Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.7"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas pyinstaller
+
+      - name: Build with PyInstaller
+        run: pyinstaller --name=python_data_processor --hidden-import=numpy --hidden-import=pandas --onefile python_interpreter.py
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Install AzureSignTool
+        run: dotnet tool install --global AzureSignTool --version 4.0.1
+
+      - name: Sign Binary
+        env:
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        run: |
+          azuresigntool sign -kvu ${{ env.AZURE_KEYVAULT_URL}} -kvc ${{ env.AZURE_KEYVAULT_CERTIFICATE }} -kvi ${{ env.AZURE_CLIENT_ID }} -kvs ${{ env.AZURE_CLIENT_SECRET }} -kvt ${{ env.AZURE_TENANT_ID }} -tr http://timestamp.digicert.com -td sha256 dist\python_data_processor.exe
+
+      - name: Upload binary as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-python-interpreter
+          path: dist\python_data_processor.exe
+
+      - name: Create interpreters directory if it doesn't exist
+        run: mkdir -p interpreters
+
+      - name: Move built interpreter to interpreters directory
+        run: mv dist/python_data_processor interpreters/
+
+      - name: Commit and push if there are changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
+          git add interpreters
+          git commit -m "Update interpreters" || echo "No changes to commit"
+          git push origin $current_branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
