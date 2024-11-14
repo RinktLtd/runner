@@ -56,19 +56,27 @@ jobs:
           name: windows-python-interpreter
           path: dist\python_data_processor.exe
 
+  commit-and-push-interpreter:
+    needs: build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Windows binary artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-python-interpreter
+          path: interpreters
+
       - name: Create interpreters directory if it doesn't exist
         run: mkdir -p interpreters
-
-      - name: Move built interpreter to interpreters directory
-        run: mv dist/python_data_processor interpreters/
 
       - name: Commit and push if there are changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          current_branch=$(git rev-parse --abbrev-ref HEAD)
           git add interpreters
           git commit -m "Update interpreters" || echo "No changes to commit"
-          git push origin $current_branch
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
