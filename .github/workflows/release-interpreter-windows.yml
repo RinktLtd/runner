@@ -77,8 +77,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
           git add interpreters
           git commit -m "Update interpreters" || echo "No changes to commit"
-          git push
+          git push origin $current_branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
