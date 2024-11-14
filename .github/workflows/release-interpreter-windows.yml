@@ -16,6 +16,8 @@ jobs:
   build-windows:
     name: Build for Windows
     runs-on: windows-latest
+    environment:
+      name: runner
     steps:
       - uses: actions/checkout@v4
 
