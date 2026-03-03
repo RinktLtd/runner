@@ -1,5 +1,10 @@
 # Rinkt Runner
 
+<p align="center">
+  <a href="https://rinkt.com"><img src="https://img.shields.io/badge/status-private%20beta-blue" alt="Status: Private Beta"></a>
+  <a href="https://github.com/RinktLtd/runner/discussions"><img src="https://img.shields.io/github/discussions/RinktLtd/runner" alt="GitHub Discussions"></a>
+</p>
+
 **One binary. Browser, desktop, Office, and API automation with durable execution.**
 
 Rinkt Runner is a cross-platform automation engine built in Go. It executes
@@ -7,9 +12,17 @@ workflows that span Playwright-driven browsers, native desktop applications,
 Microsoft Office, REST/GraphQL APIs, and Google Drive — from a single
 lightweight process. No orchestration server required for standalone use.
 
-> **Status:** Private beta.
-> [Request early access](https://rinkt.com) or
-> [watch this repo](https://github.com/RinktLtd/runner/subscription) to follow progress.
+<!-- TODO: Step 3 — Add hero banner once assets/banner.png is created
+<p align="center">
+  <img src="assets/banner.png" alt="Rinkt Runner" width="100%">
+</p>
+-->
+
+<!-- TODO: Step 4 — Add product screenshot once assets/demo.png is captured
+<p align="center">
+  <img src="assets/demo.png" alt="Rinkt Runner workflow execution" width="800">
+</p>
+-->
 
 ---
 
@@ -34,22 +47,17 @@ Runner handles all three in one workflow.
 
 ## How it works
 
-```
-                        +------------------+
-                        |    Rinkt API     |  (orchestration, optional)
-                        +--------+---------+
-                                 |
-                        +--------v---------+
-                        |   Dispatcher     |  (task routing)
-                        +--------+---------+
-                                 |
-                        +--------v---------+
-  You are here --->     |     Runner       |  (execution engine)
-                        +------------------+
-                        |  100+ activities |
-                        +--+--+--+--+--+--+
-                           |  |  |  |  |
-              Browser  Desktop Office API  Drive
+```mermaid
+graph TD
+    A["Rinkt API — orchestration, optional"] --> B["Dispatcher — task routing"]
+    B --> C["Runner — execution engine"]
+    C --> D["100+ activities"]
+    D --> E["Browser"]
+    D --> F["Desktop"]
+    D --> G["Office"]
+    D --> H["API"]
+    D --> I["Drive"]
+    style C fill:#2563eb,color:#fff,stroke:#1d4ed8
 ```
 
 Runner can operate standalone or as part of the full Rinkt platform. In
