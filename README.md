@@ -2,11 +2,6 @@
   <img src="assets/banner.png" alt="Rinkt Runner" width="100%">
 </p>
 
-<p align="center">
-  <a href="https://rinkt.com"><img src="https://img.shields.io/badge/status-private%20beta-blue" alt="Status: Private Beta"></a>
-  <a href="https://github.com/RinktLtd/runner/discussions"><img src="https://img.shields.io/github/discussions/RinktLtd/runner" alt="GitHub Discussions"></a>
-</p>
-
 **One binary. Browser, desktop, Office, and API automation with durable execution.**
 
 Rinkt Runner is a cross-platform automation engine built in Go. It executes
