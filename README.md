@@ -1,4 +1,6 @@
-# Rinkt Runner
+<p align="center">
+  <img src="assets/banner.png" alt="Rinkt Runner" width="100%">
+</p>
 
 <p align="center">
   <a href="https://rinkt.com"><img src="https://img.shields.io/badge/status-private%20beta-blue" alt="Status: Private Beta"></a>
@@ -12,13 +14,7 @@ workflows that span Playwright-driven browsers, native desktop applications,
 Microsoft Office, REST/GraphQL APIs, and Google Drive — from a single
 lightweight process. No orchestration server required for standalone use.
 
-<!-- TODO: Step 3 — Add hero banner once assets/banner.png is created
-<p align="center">
-  <img src="assets/banner.png" alt="Rinkt Runner" width="100%">
-</p>
--->
-
-<!-- TODO: Step 4 — Add product screenshot once assets/demo.png is captured
+<!-- TODO: Add product screenshot once assets/demo.png is captured
 <p align="center">
   <img src="assets/demo.png" alt="Rinkt Runner workflow execution" width="800">
 </p>
