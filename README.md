@@ -7,10 +7,9 @@ workflows that span Playwright-driven browsers, native desktop applications,
 Microsoft Office, REST/GraphQL APIs, and Google Drive — from a single
 lightweight process. No orchestration server required for standalone use.
 
-> **Status:** Private beta (targeting Q2 2026 for public release). Source code
-> will be published here at GA.
+> **Status:** Private beta.
 > [Request early access](https://rinkt.com) or
-> [watch this repo](https://github.com/RinktLtd/runner/subscription) to be notified.
+> [watch this repo](https://github.com/RinktLtd/runner/subscription) to follow progress.
 
 ---
 
@@ -110,13 +109,12 @@ steps:
 
 ## Roadmap
 
-| Milestone | Target | Status |
-|---|---|---|
-| Public source release | Q2 2026 | In progress |
-| Plugin system for custom activities | Q3 2026 | Planned |
-| GitHub Actions integration | Q3 2026 | Planned |
-| VS Code extension | Q4 2026 | Planned |
-| Workflow marketplace | 2027 | Exploring |
+| Milestone | Status |
+|---|---|
+| Plugin system for custom activities | Planned |
+| GitHub Actions integration | Planned |
+| VS Code extension | Planned |
+| Workflow marketplace | Exploring |
 
 ## Get involved
 
@@ -134,7 +132,7 @@ steps:
 
 ## License
 
-Source-available license. Details will be published with the public release.
+Source-available license. Details to be published.
 
 ---
 
